@@ -23,8 +23,13 @@ export const islandAndLake = new Map()
 export const snowflakeModified = new Map()
 	.set('F', 'F+F-F-F+F');
 
+export const dragonCurve = new Map()
+	.set('F', 'F-H')
+	.set('H', 'F+H');
+
 export const interpretKochLSystem:LRulesInstructions = new Map()
 	.set('+', (state:State) => turn(state, 'L'))
 	.set('-', (state:State) => turn(state, 'R'))
 	.set('F', (state:State) => move(state, 'F'))
+	.set('H', (state:State) => move(state, 'F'))
 	.set('f', (state:State) => move(state, 'f'));

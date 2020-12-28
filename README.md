@@ -14,3 +14,4 @@ The project is an extension of a [previous project](https://github.com/bergsans/
 ![](./output/koch-curve-1.png)
 ![](./output/koch-curve-4.png)
 ![](./output/snow-flake-modified.png)
+![](./output/dragon-curve.png)
