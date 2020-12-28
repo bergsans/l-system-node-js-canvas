@@ -29,7 +29,8 @@ export interface State {
   ctx: CanvasRenderingContext2D;
   dir: Direction;
   dirs: Direction[],
-  mods: DirectionModifiers
+  mods: DirectionModifiers,
+  lineLn: number;
 }
 
 export type DirectionModifiers = {

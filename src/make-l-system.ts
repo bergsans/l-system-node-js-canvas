@@ -1,5 +1,4 @@
 import { Axiom, LRules, Instruction } from '../typings/typings';
-import { inc } from './helpers';
 
 const nextGeneration = (rules:LRules) => (
 	acc:Axiom,
@@ -21,7 +20,7 @@ export const makeLSystem = (
 		generation === generations
 			? newAxiom
 			: generation === 0
-				? mLS(inc(generation), makeGeneration(axiom, lrules))
-				: mLS(inc(generation), makeGeneration(newAxiom, lrules));
+				? mLS(generation + 1, makeGeneration(axiom, lrules))
+				: mLS(generation + 1, makeGeneration(newAxiom, lrules));
 	return mLS();
 };

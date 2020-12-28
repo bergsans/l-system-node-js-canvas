@@ -2,10 +2,6 @@ import { DirectionModifiers,Point, Direction } from '../typings/typings';
 
 export const id = <T>(v:T):T => v;
 
-export const dec = (x:number):number => x - 1;
-
-export const inc = (x:number):number => x + 1;
-
 const getDirIndex = (
 	currDir:Direction,
 	dirs:Direction[]

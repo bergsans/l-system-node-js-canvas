@@ -13,6 +13,16 @@ export const kochCurve2:LRules = new Map()
 export const kochCurve3:LRules = new Map()
 	.set('F', 'FF-F-F-F-F-F+F');
 
+export const kochCurve4:LRules = new Map()
+	.set('F', 'FF-F+F-F-FF');
+
+export const islandAndLake = new Map()
+	.set('F', 'F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF')
+	.set('f', 'ffffff');
+
+export const snowflakeModified = new Map()
+	.set('F', 'F+F-F-F+F');
+
 export const interpretKochLSystem:LRulesInstructions = new Map()
 	.set('+', (state:State) => turn(state, 'L'))
 	.set('-', (state:State) => turn(state, 'R'))

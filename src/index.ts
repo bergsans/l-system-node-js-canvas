@@ -1,45 +1,23 @@
-import {writeFileSync} from 'fs';
-import { Direction } from '../typings/typings';
-import { Canvas, createCanvas } from 'canvas';
-import { makeLSystem } from './make-l-system';
-import {
-	interpretKochLSystem,
-	quadraticKochIsland
+import { 
+	quadraticKochIsland,
+	kochCurve1,
+	kochCurve2,
+	kochCurve3,
+	kochCurve4,
+	islandAndLake,
+	snowflakeModified
 } from './koch-transformation-and-instruction-rules';
-import { directionModifiers, directions } from '../constants/constants';
-import { createLSystemVisualization } from './visualization';
+import { drawLSystem } from './visualization';
 
-const width = 1024;
-const height = 768;
-
-const canvas:Canvas = createCanvas(width, height);
-const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
-
-if(ctx) {
-	ctx.fillStyle = '#fffff8';
-	ctx.fillRect(0, 0, width, height);
-	ctx.strokeStyle ='#BF616A';
-
-	const interpretation = makeLSystem(
-		3,
-		'F+F+F+F',
-		quadraticKochIsland
-	);
-	const img:CanvasRenderingContext2D = createLSystemVisualization(
-		interpretation,
-		{
-			point: {
-				x: width/2 + 100,
-				y: height/2 + 100
-			},
-			ctx,
-			dir: Direction.N,
-			dirs: directions,
-			mods: directionModifiers
-		},
-		interpretKochLSystem
-	);
-	img.stroke();
-	const buffer = canvas.toBuffer('image/png');
-	writeFileSync('./output/image.png', buffer);
+const patterns = [
+	{ name: 'quadratic-koch-island', rules: quadraticKochIsland, generations: 3, initialAxiom: 'F-F-F-F', lineLn: 7,x: 300, y:600},
+	{ name: 'snow-flake-modified', rules: snowflakeModified, generations: 4, initialAxiom: '-F', lineLn: 10, x: 150, y: 500 },
+	{ name: 'island-and-lake',rules: islandAndLake, generations: 2, initialAxiom: 'F+F+F+F', lineLn: 10, x:600, y:600 },
+	{ name: 'koch-curve-1',   rules: kochCurve1, generations: 4, initialAxiom: 'F-F-F-F', lineLn: 7, x: 200, y: 700 },
+	{ name: 'koch-curve-2',   rules: kochCurve2, generations: 4, initialAxiom: 'F-F-F-F', lineLn: 7,x:200,y:600  },
+	{ name: 'koch-curve-3',   rules: kochCurve3, generations: 4, initialAxiom: 'F-F-F-F', lineLn:5,x:100,y:200 },
+	{ name: 'koch-curve-4', rules: kochCurve4, generations: 3, initialAxiom: 'F-F-F-F', lineLn:10,x:400,y: 200}
+];
+for(const { name, rules, generations, initialAxiom, lineLn,x,y } of patterns) {
+	drawLSystem(name, rules, generations, initialAxiom, lineLn, x, y);
 }

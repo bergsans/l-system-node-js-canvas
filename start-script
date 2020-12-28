@@ -2,6 +2,6 @@
 
 yarn build && \
 echo "Starting generating patterns..." && \
-echo "This can take a bit of time." && \
+echo "This can take a few seconds." && \
 node dist/src/index.js
 
