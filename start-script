@@ -1,0 +1,7 @@
+#!/bin/bash
+
+yarn build && \
+echo "Starting generating patterns..." && \
+echo "This can take a bit of time." && \
+node dist/src/index.js
+

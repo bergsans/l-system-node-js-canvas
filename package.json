@@ -1,0 +1,23 @@
+{
+  "name": "l-system-node-js-canvas",
+  "version": "1.0.0",
+  "description": "l-system",
+  "main": "index.js",
+  "repository": "https://github.com/bergsans/l-system-node-js-canvas.git",
+  "author": "Claes-Magnus Berg <claes-magnus@herebeseaswines.net>",
+  "license": "MIT",
+  "scripts": {
+    "generate": "./start-script",
+    "build": "tsc src/** --downlevelIteration --outDir dist"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.16.0",
+    "eslint-plugin-node": "^11.1.0",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "canvas": "^2.6.1"
+  }
+}
