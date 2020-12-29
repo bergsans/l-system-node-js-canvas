@@ -1,32 +1,22 @@
 import { Canvas, createCanvas } from 'canvas';
-import {writeFileSync} from 'fs';
-import { Direction, State, LRulesInstructions, Axiom } from '../typings/typings';
-import { id } from './helpers';
+import { writeFileSync } from 'fs';
+import { LRules, Visualization, LRulesInstructions, Axiom } from '../typings/typings';
 import { makeLSystem } from './make-l-system';
-import { interpretKochLSystem, quadraticKochIsland } from './koch-transformation-and-instruction-rules';
-import { directionModifiers, directions } from '../constants/constants';
+import { interpretLSystem } from './interpret';
 
-export const lineTo = (ctx:CanvasRenderingContext2D, x:number, y:number):CanvasRenderingContext2D => {
-	ctx.lineTo(x,y);
-	return ctx;
-};
-
-export const moveTo = (ctx:CanvasRenderingContext2D, x:number, y:number):CanvasRenderingContext2D => {
-	ctx.moveTo(x, y);
-	return ctx;
-};
+const id = <T>(v:T):T => v;
 
 const transformCharacter = (
 	instructions:LRulesInstructions
-) => (axiom: Axiom) => (state:State) => (instructions.get(axiom) ?? id)(state);
+) => (axiom: Axiom) => (state:Visualization) => (instructions.get(axiom) ?? id)(state);
 
 const transformReducer = (
 	instructions:LRulesInstructions
-) => (acc:State, v:Axiom) => transformCharacter(instructions)(v)(acc);
+) => (acc:Visualization, v:Axiom) => transformCharacter(instructions)(v)(acc);
 
 export const createLSystemVisualization = (
 	axiom:Axiom,
-	state:State,
+	state:Visualization,
 	instructions:LRulesInstructions
 ):CanvasRenderingContext2D => axiom
 	.split('')
@@ -34,18 +24,16 @@ export const createLSystemVisualization = (
 	.ctx;
 
 export function drawLSystem(
-	filename = 'quadraticKochIsland',
-	rules = quadraticKochIsland,
-	generations = 4,
-	initialAxiom = 'F-F-F-F',
-	lineLn = 5,
+	filename:string,
+	rules:LRules,
+	generations:number,
+	initialAxiom:Axiom,
+	lineLn:number,
+	degrees:number,
 	x = 1024/2,
 	y = 768/2,
-	dir = Direction.N,
-	dirs = directions,
-	mods = directionModifiers,
-	width =1024,
-	height =768
+	width = 1024,
+	height = 768
 ):void {
 	const canvas:Canvas = createCanvas(width, height);
 	const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
@@ -53,22 +41,17 @@ export function drawLSystem(
 	ctx.fillStyle = '#fffff8';
 	ctx.fillRect(0, 0, width, height);
 	ctx.strokeStyle ='#6A0917';
-	const interpretation = makeLSystem(
-		generations,
-		initialAxiom,
-		rules
-	);
+	ctx.translate(x, y);
+	const axioms = makeLSystem(generations, initialAxiom, rules);
+	const visualization:Visualization = {
+		ctx,
+		lineLn,
+		degrees
+	};
 	const img:CanvasRenderingContext2D = createLSystemVisualization(
-		interpretation,
-		{
-			point: { x, y },
-			ctx,
-			dir,
-			dirs,
-			mods,
-			lineLn
-		},
-		interpretKochLSystem
+		axioms,
+		visualization,
+		interpretLSystem
 	);
 	img.stroke();
 	const buffer = canvas.toBuffer('image/png');

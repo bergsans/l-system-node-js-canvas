@@ -1,8 +1,4 @@
-import { ImageData } from 'canvas';
-
-export type Turn = 'L' | 'R';
-
-export type AxiomHandler = (s:State) => State;
+export type AxiomHandler = (v:Visualization) => Visualization;
 
 export type LRules = Map<Axiom, Axiom>;
 
@@ -12,27 +8,8 @@ export type Axiom = string;
 
 export type Instruction = string;
 
-export enum Direction {
-  N,
-  E,
-  S,
-  W
-}
-
-export interface Point {
-  y: number;
-  x: number;
-}
-
-export interface State {
-  point: Point;
+export interface Visualization {
   ctx: CanvasRenderingContext2D;
-  dir: Direction;
-  dirs: Direction[],
-  mods: DirectionModifiers,
   lineLn: number;
+  degrees: number;
 }
-
-export type DirectionModifiers = {
-  [key in Direction]: [number, number];
-};

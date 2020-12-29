@@ -1,5 +1,4 @@
-import { LRulesInstructions, State, LRules } from '../typings/typings';
-import { turn, move } from './interpret-instructions';
+import { LRules } from '../typings/typings';
 
 export const quadraticKochIsland:LRules = new Map()
 	.set('F', 'F-F+F+FF-F-F+F');
@@ -27,9 +26,12 @@ export const dragonCurve = new Map()
 	.set('F', 'F-H')
 	.set('H', 'F+H');
 
-export const interpretKochLSystem:LRulesInstructions = new Map()
-	.set('+', (state:State) => turn(state, 'L'))
-	.set('-', (state:State) => turn(state, 'R'))
-	.set('F', (state:State) => move(state, 'F'))
-	.set('H', (state:State) => move(state, 'F'))
-	.set('f', (state:State) => move(state, 'f'));
+export const gosperCurve = new Map()
+	.set('F', 'F-H--H+F++FF+H-')
+	.set('H', '+F-HH--H-F++F+H');
+
+export const roundStar = new Map()
+	.set('F', 'F++F');
+
+export const pentadendrite = new Map()
+	.set('F', 'F-F-F++F+F-F');
