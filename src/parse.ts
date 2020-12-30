@@ -1,7 +1,7 @@
 import { LRulesInstructions, Visualization } from '../typings/typings';
 import { pushContext, popContext, rotate, line, move } from './visualization-helpers';
 
-export const interpretLSystem:LRulesInstructions = new Map()
+export const parseLSystem:LRulesInstructions = new Map()
 	.set('+', (visualization:Visualization) => ({
 		...visualization,
 		ctx: rotate(visualization.ctx, visualization.degrees)

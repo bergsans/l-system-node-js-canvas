@@ -2,7 +2,7 @@ import { Canvas, createCanvas } from 'canvas';
 import { writeFileSync } from 'fs';
 import { LRules, Visualization, LRulesInstructions, Axiom } from '../typings/typings';
 import { makeLSystem } from './make-l-system';
-import { interpretLSystem } from './interpret';
+import { parseLSystem } from './parse';
 
 const id = <T>(v:T):T => v;
 
@@ -51,7 +51,7 @@ export function drawLSystem(
 	const img:CanvasRenderingContext2D = createLSystemVisualization(
 		axioms,
 		visualization,
-		interpretLSystem
+		parseLSystem
 	);
 	img.stroke();
 	const buffer = canvas.toBuffer('image/png');
