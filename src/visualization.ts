@@ -8,7 +8,7 @@ const id = <T>(v:T):T => v;
 
 const transformCharacter = (
 	instructions:LRulesInstructions
-) => (axiom: Axiom) => (state:Visualization) => (instructions.get(axiom) ?? id)(state);
+) => (axiom: Axiom) => (v:Visualization) => (instructions.get(axiom) ?? id)(v);
 
 const transformReducer = (
 	instructions:LRulesInstructions
@@ -16,11 +16,11 @@ const transformReducer = (
 
 export const createLSystemVisualization = (
 	axiom:Axiom,
-	state:Visualization,
+	v:Visualization,
 	instructions:LRulesInstructions
 ):CanvasRenderingContext2D => axiom
 	.split('')
-	.reduce(transformReducer(instructions), state)
+	.reduce(transformReducer(instructions), v)
 	.ctx;
 
 export function drawLSystem(

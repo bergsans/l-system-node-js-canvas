@@ -2,31 +2,31 @@ import { LRulesInstructions, Visualization } from '../typings/typings';
 import { pushContext, popContext, rotate, line, move } from './visualization-helpers';
 
 export const parseLSystem:LRulesInstructions = new Map()
-	.set('+', (visualization:Visualization) => ({
-		...visualization,
-		ctx: rotate(visualization.ctx, visualization.degrees)
+	.set('+', (v:Visualization) => ({
+		...v,
+		ctx: rotate(v.ctx, v.degrees)
 	}))
-	.set('-', (visualization:Visualization) => ({
-		...visualization,
-		ctx: rotate(visualization.ctx, -visualization.degrees)
+	.set('-', (v:Visualization) => ({
+		...v,
+		ctx: rotate(v.ctx, -v.degrees)
 	}))
-	.set('F', (visualization:Visualization) => ({
-		...visualization,
-		ctx: line(visualization.ctx, visualization.lineLn)
+	.set('F', (v:Visualization) => ({
+		...v,
+		ctx: line(v.ctx, v.lineLn)
 	}))
-	.set('H', (visualization:Visualization) => ({
-		...visualization,
-		ctx: line(visualization.ctx, visualization.lineLn)
+	.set('H', (v:Visualization) => ({
+		...v,
+		ctx: line(v.ctx, v.lineLn)
 	}))
-	.set('f', (visualization:Visualization) => ({
-		...visualization,
-		ctx: move(visualization.ctx, visualization.lineLn)
+	.set('f', (v:Visualization) => ({
+		...v,
+		ctx: move(v.ctx, v.lineLn)
 	}))
-	.set('[', (visualization:Visualization) => ({
-		...visualization,
-		ctx: pushContext(visualization.ctx)
+	.set('[', (v:Visualization) => ({
+		...v,
+		ctx: pushContext(v.ctx)
 	}))
-	.set(']', (visualization:Visualization) => ({
-		...visualization,
-		ctx: popContext(visualization.ctx)
+	.set(']', (v:Visualization) => ({
+		...v,
+		ctx: popContext(v.ctx)
 	}));
