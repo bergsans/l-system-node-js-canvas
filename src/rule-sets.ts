@@ -35,3 +35,17 @@ export const roundStar = new Map()
 
 export const pentadendrite = new Map()
 	.set('F', 'F-F-F++F+F-F');
+
+export const tree1 = new Map()
+	.set('F', 'FF')
+	.set('X', 'F[+X]F[-X]+X');
+
+export const tree2 = new Map()
+	.set('F', 'F[+F]F[-F][F]');
+
+export const tree3 = new Map()
+	.set('F', 'FF-[-F+F+F]+[+F-F-F]');
+
+export const tree4 = new Map()
+	.set('F', 'FF')
+	.set('X', 'F[+X][-X]FX');

@@ -1,5 +1,5 @@
 import { LRulesInstructions, Visualization } from '../typings/typings';
-import { rotate, line, move } from './visualization-helpers';
+import { pushContext, popContext, rotate, line, move } from './visualization-helpers';
 
 export const interpretLSystem:LRulesInstructions = new Map()
 	.set('+', (visualization:Visualization) => ({
@@ -21,4 +21,12 @@ export const interpretLSystem:LRulesInstructions = new Map()
 	.set('f', (visualization:Visualization) => ({
 		...visualization,
 		ctx: move(visualization.ctx, visualization.lineLn)
+	}))
+	.set('[', (visualization:Visualization) => ({
+		...visualization,
+		ctx: pushContext(visualization.ctx)
+	}))
+	.set(']', (visualization:Visualization) => ({
+		...visualization,
+		ctx: popContext(visualization.ctx)
 	}));
