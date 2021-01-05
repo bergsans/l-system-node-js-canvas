@@ -11,16 +11,13 @@ const makeGeneration = (prevGenerations:Axiom, rules:LRules) =>
 		.reduce(nextGeneration(rules), '');
 
 export const makeLSystem = (
-	generations = 0,
-	axiom:Axiom = '',
-	lrules:LRules
-):Instruction => {
-	if(generations === 0) return axiom;
-	const mLS = (generation = 0, newAxiom:Axiom = ''):Axiom =>
+	generations: number,
+	firstAxiom: Axiom,
+	lrules: LRules
+): Instruction => {
+	const mLS = (generation: number, axiom: Axiom): Axiom =>
 		generation === generations
-			? newAxiom
-			: generation === 0
-				? mLS(generation + 1, makeGeneration(axiom, lrules))
-				: mLS(generation + 1, makeGeneration(newAxiom, lrules));
-	return mLS();
+			? axiom
+			: mLS(generation + 1, makeGeneration(axiom, lrules));
+	return mLS(0, firstAxiom);
 };
