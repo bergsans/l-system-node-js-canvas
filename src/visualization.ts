@@ -41,7 +41,7 @@ export function drawLSystem(
   const canvas: Canvas = createCanvas(width, height);
   const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
   if (!ctx) return;
-  ctx.fillStyle = '#ECE9E1';
+  ctx.fillStyle = '#F6F5F1';
   ctx.fillRect(0, 0, width, height);
   ctx.strokeStyle = '#6A0917';
   ctx.translate(x, y);
